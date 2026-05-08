@@ -1,0 +1,23 @@
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# PowerShell
+*.pshistory
+
+# Packaging
+*.nupkg
+*.zip
+*.tar.gz
+
+# Node/Python caches (if any future tooling)
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Logs
+*.log
