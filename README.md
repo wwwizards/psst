@@ -28,6 +28,14 @@ psst 01 03                            # Run multiple test groups
 psst -Output Minimal                  # Run all with minimal output
 ```
 
+## Mandatory usage policy (2026-08-14)
+
+**Always run tests through `psst`, never invoke Pester directly** — except to diagnose `psst` itself, or to diff behavior when validating a brand-new test against both paths. This isn't a style preference: `psst`'s fuzzy tiering + bordered pass/fail/skip summary is what keeps AI-assisted TDD cheap — an agent reads one summary block instead of writing custom Pester-output parsing, so token spend and debug-rabbit-hole risk both go down.
+
+**Full regression before/after every handoff is mandatory** — run bare `psst` (no filter) at the start and end of a session touching this repo, not just the targeted subset you were working on. A targeted `psst <pattern>` run during active development is fine; it is not a substitute for the full-regression gate at handoff boundaries.
+
+**Known gap:** `psst` does not yet evaluate code coverage (no `-CodeCoverage` passthrough) — see ROADMAP.md. A green `psst` run means the tests that exist passed, not that the code is fully covered.
+
 ## Installation
 
 ### Global Installation (Recommended)

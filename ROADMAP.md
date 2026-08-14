@@ -1,4 +1,7 @@
 # psst Query Enhancement Roadmap
+```
+#TODO: add meta-header here & take created date from FS...
+``
 
 **Current state (v0.4.0):** Fuzzy pattern matching with implicit OR logic. Works great for simple cases (`psst h` → hostpool tests) but limited for complex scenarios.
 
@@ -54,6 +57,22 @@ psst -q "modified:today"            # Tests changed today
 psst -q "created:>2025-11-01"       # Tests added since Nov 1
 psst -q "duration:<5s"              # Fast tests only (requires telemetry data)
 ```
+
+---
+
+## Cross-cutting: code-coverage evaluation (not yet built, either tool)
+
+**Status (2026-08-14): gap, not a silent no-op.** Neither `psst` nor its Python companion `pyst` ([ipscan/pyst.py](../../ipscan/pyst.py), pre-release v0.1.x) currently wraps `-CodeCoverage` (Pester) or `coverage.py`/`pytest-cov` (pytest). "Evaluate test coverage" as part of a mandatory pre/post-handoff regression is a real ask (2026-08-14 session) these tools don't satisfy yet — track here, don't assume coverage is being measured just because `psst`/`pyst` reports green.
+
+### Proposed (not started)
+- `psst -Coverage` passthrough to Pester's native `-CodeCoverage`, summarized in the same bordered-table format as pass/fail.
+- `pyst --coverage` passthrough to `coverage.py` if installed, degrading gracefully (stdlib-only design) when it isn't.
+
+---
+
+## Cross-cutting: `pyst` feature-parity target (backlogged 2026-08-14)
+
+`pyst` ([ipscan/pyst.py](../../ipscan/pyst.py)) is growing beyond its origin project (ipscan) toward pickaxe and other Python tooling — an ART-pattern candidate for its own repo. **Direction (user-confirmed 2026-08-14):** `pyst` should reach feature + UI/UX parity with `psst` (this tool) before any split — bordered pass/fail/skip summary, saved queries/aliases (this file's v0.6.0 section), tag-style selection — then `pickaxe` performs the extraction once its Track A pipeline exists. When touching `psst`'s UX in future versions, keep `pyst` parity in mind as a design constraint, not an afterthought. Full detail: root `.HANDOFF/STATE.md` (PINNED), `ipscan/README.md` Roadmap.
 
 ---
 
